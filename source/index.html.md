@@ -22,7 +22,7 @@ The Yum Logistics API enables you to integate your ordering platform to Yum Logi
 
 Service | Integration | Description
 --------- | ------- | -----------
-Order Processing | API | Enable Client to Create, Update and Retrieve orders to the logistics platform.
+Order Processing | API | Enable Client to Create, Update and Retrieve orders on the logistics platform.
 Rider Availability | API | Enable  Client to query riders availability relative to a specific location
 Order Status Notifications | Web Hook | Notify the client when an order status changes in real time.
 Master Data Mapping | Configuration | Match organisations and branches for metrics tracking.
@@ -39,7 +39,7 @@ The branches are saved together with their addresses which are used when request
 
 Name | Description
 --------- | -----------
-name | The name of the organisation eg KFC
+name | The name of the organisation e.g. KFC
 mapping_id | the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on
 description | an optional description of the organisation
 
@@ -48,7 +48,7 @@ description | an optional description of the organisation
 Name | Description
 --------- | -----------
 name | The name of the organisation eg KFC
-mapping_id | the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on
+mapping_id | the client ID of the organisation e.g. 1 . Incase where we have one organisation a default can be agreed on
 description | an optional description of the organisation
 organisation | The branch the organisation belongs to
 phone_number | An optional contact number to the branch
@@ -64,8 +64,8 @@ location.address | The address info with format of House Number, Street Directio
 
 # API 
 
-We offer a RESTful api to interact with the logistics platform, that speaks exclusively in JSON. Any request to the API endpoints need to be authenticated.
-A Sandbox will be provided for testing the API and in order to facilitate the integration.
+We offer a RESTful api to interact with the logistics platform, that speaks exclusively in JSON. Any request to the API endpoints needs to be authenticated.
+A Sandbox will be provided for testing the API to facilitate the integration.
 
 <aside class="notice">
   Since the API is exclusively JSON, you  should always set the <code>Content-Type</code> header to <code>application/json</code> to ensure that your requests are properly accepted and processed by the API
@@ -349,7 +349,7 @@ created_date | string | Order creation date with timezone
 updated_date | string | Order update date with timezone
 payment_status_display | string | Order payment status description
 
-## <code>GET /orders/{order_id}/</code>
+### <code>GET /orders/{order_id}/</code>
 
 Gets a specific order
 
