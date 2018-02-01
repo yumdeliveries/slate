@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href='#'>We shall </a>
+  - <a href='#'>We shall provide a username and password for the sandbo and production environments </a>
   - <a href='#'> &copy;2018 Yum Deliveries LTD</a>
 
 includes:
