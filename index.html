@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>API Reference</title>
+    <title>YUM Logistis API</title>
 
     <style>
       .highlight table td { padding: 5px; }
@@ -201,7 +201,7 @@
       <script src="javascripts/all.js"></script>
   </head>
 
-  <body class="index" data-languages="[&quot;shell&quot;,&quot;ruby&quot;,&quot;python&quot;,&quot;javascript&quot;]">
+  <body class="index" data-languages="[&quot;shell&quot;]">
     <a href="#" id="nav-button">
       <span>
         NAV
@@ -212,9 +212,6 @@
       <img src="images/logo.png" class="logo" alt="Logo" />
         <div class="lang-selector">
               <a href="#" data-language-name="shell">shell</a>
-              <a href="#" data-language-name="ruby">ruby</a>
-              <a href="#" data-language-name="python">python</a>
-              <a href="#" data-language-name="javascript">javascript</a>
         </div>
         <div class="search">
           <input type="text" class="search" id="input-search" placeholder="Search">
@@ -222,220 +219,781 @@
         <ul class="search-results"></ul>
       <div id="toc" class="toc-list-h1">
           <li>
-            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="introduction">Introduction</a>
           </li>
           <li>
-            <a href="#authentication" class="toc-h1 toc-link" data-title="Authentication">Authentication</a>
-          </li>
-          <li>
-            <a href="#kittens" class="toc-h1 toc-link" data-title="Kittens">Kittens</a>
+            <a href="#master-data" class="toc-h1 toc-link" data-title="master-data">Master Data</a>
               <ul class="toc-list-h2">
                   <li>
-                    <a href="#get-all-kittens" class="toc-h2 toc-link" data-title="Get All Kittens">Get All Kittens</a>
+                    <a href="#organisations-object-data-fields" class="toc-h2 toc-link" data-title="organisations-object-data-fields">Organisations object data fields</a>
                   </li>
                   <li>
-                    <a href="#get-a-specific-kitten" class="toc-h2 toc-link" data-title="Get a Specific Kitten">Get a Specific Kitten</a>
-                  </li>
-                  <li>
-                    <a href="#delete-a-specific-kitten" class="toc-h2 toc-link" data-title="Delete a Specific Kitten">Delete a Specific Kitten</a>
+                    <a href="#branch-object-data-fields" class="toc-h2 toc-link" data-title="branch-object-data-fields">Branch object data fields</a>
                   </li>
               </ul>
           </li>
           <li>
-            <a href="#errors" class="toc-h1 toc-link" data-title="Errors">Errors</a>
+            <a href="#api" class="toc-h1 toc-link" data-title="api">API</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#authentication" class="toc-h2 toc-link" data-title="authentication">Authentication</a>
+                  </li>
+                  <li>
+                    <a href="#orders" class="toc-h2 toc-link" data-title="orders">Orders</a>
+                  </li>
+                  <li>
+                    <a href="#get-orders-order_id" class="toc-h2 toc-link" data-title="code-get-orders-order_id-code"><code>GET /orders/{order_id}/</code></a>
+                  </li>
+                  <li>
+                    <a href="#webhooks" class="toc-h2 toc-link" data-title="webhooks">Webhooks</a>
+                  </li>
+                  <li>
+                    <a href="#riders" class="toc-h2 toc-link" data-title="riders">Riders</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#errors" class="toc-h1 toc-link" data-title="errors">Errors</a>
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>Sign Up for a Developer Key</a></li>
-            <li><a href='https://github.com/lord/slate'>Documentation Powered by Slate</a></li>
+            <li><a href='#'>We shall </a></li>
+            <li><a href='#'> &copy;2018 Yum Deliveries LTD</a></li>
         </ul>
     </div>
     <div class="page-wrapper">
       <div class="dark-box"></div>
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
-<p>Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.</p>
+<p>Yum Logistics simplifies your deliveries by providing optimal riders on request and enabling your customers to live track their orders location.</p>
 
-<p>We have language bindings in Shell, Ruby, and Python! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+<p>The Yum Logistics API enables you to integate your ordering platform to Yum Logistics for dispatch management.  The full integration is summarised in the table below.</p>
 
-<p>This example API documentation page was created with <a href="https://github.com/lord/slate">Slate</a>. Feel free to edit it and use it as a base for your own API&#39;s documentation.</p>
-<h1 id='authentication'>Authentication</h1>
-<blockquote>
-<p>To authorize, use this code:</p>
-</blockquote>
-<pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
-curl <span class="s2">"api_endpoint_here"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-</code></pre>
-<blockquote>
-<p>Make sure to replace <code>meowmeowmeow</code> with your API key.</p>
-</blockquote>
-
-<p>Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our <a href="http://example.com/developers">developer portal</a>.</p>
-
-<p>Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:</p>
-
-<p><code>Authorization: meowmeowmeow</code></p>
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-<h1 id='kittens'>Kittens</h1><h2 id='get-all-kittens'>Get All Kittens</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">kittens</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">();</span>
-</code></pre>
-<blockquote>
-<p>The above command returns JSON structured like this:</p>
-</blockquote>
-<pre class="highlight json tab-json"><code><span class="p">[</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Fluffums"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"calico"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">6</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">7</span><span class="w">
-  </span><span class="p">},</span><span class="w">
-  </span><span class="p">{</span><span class="w">
-    </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-    </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-  </span><span class="p">}</span><span class="w">
-</span><span class="p">]</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves all kittens.</p>
-<h3 id='http-request'>HTTP Request</h3>
-<p><code>GET http://example.com/api/kittens</code></p>
-<h3 id='query-parameters'>Query Parameters</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
-<th>Default</th>
+<th>Service</th>
+<th>Integration</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>include_cats</td>
-<td>false</td>
-<td>If set to true, the result will also include cats.</td>
+<td>Order Processing</td>
+<td>API</td>
+<td>Enable Client to Create, Update and Retrieve orders to the logistics platform.</td>
 </tr>
 <tr>
-<td>available</td>
-<td>true</td>
-<td>If set to false, the result will include kittens that have already been adopted.</td>
+<td>Rider Availability</td>
+<td>API</td>
+<td>Enable  Client to query riders availability relative to a specific location</td>
+</tr>
+<tr>
+<td>Order Status Notifications</td>
+<td>Web Hook</td>
+<td>Notify the client when an order status changes in real time.</td>
+</tr>
+<tr>
+<td>Master Data Mapping</td>
+<td>Configuration</td>
+<td>Match organisations and branches for metrics tracking.</td>
+</tr>
+</tbody></table>
+<h1 id='master-data'>Master Data</h1>
+<p>For reporting purposes and information visibility organisations and branches from the client&#39;s platform have to be matched with those on the logistics platform. Unique IDs for branches maintained by the client must be posted as part of the order information explained in the order API section.</p>
+
+<p>After organisation and branches information is configured, clients are issued with a  username and password for consuming the API. Any information posted using these credentials, is associated to the respective organisations and branches.</p>
+
+<p>The branches are saved together with their addresses which are used when requesting for a rider to the branch.</p>
+<h2 id='organisations-object-data-fields'>Organisations object data fields</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The name of the organisation eg KFC</td>
+</tr>
+<tr>
+<td>mapping_id</td>
+<td>the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on</td>
+</tr>
+<tr>
+<td>description</td>
+<td>an optional description of the organisation</td>
+</tr>
+</tbody></table>
+<h2 id='branch-object-data-fields'>Branch object data fields</h2>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>name</td>
+<td>The name of the organisation eg KFC</td>
+</tr>
+<tr>
+<td>mapping_id</td>
+<td>the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on</td>
+</tr>
+<tr>
+<td>description</td>
+<td>an optional description of the organisation</td>
+</tr>
+<tr>
+<td>organisation</td>
+<td>The branch the organisation belongs to</td>
+</tr>
+<tr>
+<td>phone_number</td>
+<td>An optional contact number to the branch</td>
+</tr>
+<tr>
+<td>location</td>
+<td>The location object of the branch</td>
+</tr>
+<tr>
+<td>location.lat</td>
+<td>The map latitude of the branchs location</td>
+</tr>
+<tr>
+<td>location.log</td>
+<td>The map longitude of the branchs location</td>
+</tr>
+<tr>
+<td>location.address</td>
+<td>The address info with format of House Number, Street Direction, Street Name, Street Suffix, City, State, Zip, Country</td>
+</tr>
+</tbody></table>
+
+<aside class="notice">
+  The client will share the master data items in a an excel/csv document for the automated population to the database.
+</aside>
+<h1 id='api'>API</h1>
+<p>We offer a RESTful api to interact with the logistics platform, that speaks exclusively in JSON. Any request to the API endpoints need to be authenticated.
+A Sandbox will be provided for testing the API and in order to facilitate the integration.</p>
+
+<aside class="notice">
+  Since the API is exclusively JSON, you  should always set the <code>Content-Type</code> header to <code>application/json</code> to ensure that your requests are properly accepted and processed by the API
+</aside>
+<h2 id='authentication'>Authentication</h2>
+<blockquote>
+<p>Every request requiring authentication should have the headers set as below</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code><span class="c"># With shell, you can just pass the correct header with each request</span>
+curl <span class="s2">"/api/v1/auth/login/"</span>
+  -H <span class="s2">"Authorization: Bearer __token__"</span>
+</code></pre>
+<blockquote>
+<p>To get a token, request on with the code below:</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST --header <span class="s1">'Content-Type: application/json'</span> -d <span class="s1">'{ \ 
+   "username": "testuser", \ 
+   "password": "passtest" \ 
+ }'</span> <span class="s1">'/api/v1/auth/login/'</span>
+
+</code></pre>
+<blockquote>
+<p>A succesfull authentication returns JSON structured like this:</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"token"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IkFkbWluIiwiZXhwIjoxNTE5MzgyMzE3LCJlbWFpbCI6InRlY2hAeXVtLmNvLmtlIn0.-2-P6mP7JO-dIiBt5-HyWC41HT9KqtTjTrsaKsbpFLc"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<blockquote>
+<p>Example token referesh</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST --header <span class="s1">'Content-Type: application/json'</span> -d <span class="s1">'{ \ 
+   "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IkFkbWluIiwiZXhwIjoxNTE5MzgyMzE3LCJlbWFpbCI6InRlY2hAeXVtLmNvLmtlIn0.-2-P6mP7JO-dIiBt5-HyWC41HT9KqtTjTrsaKsbpFLc" \ 
+ }'</span> <span class="s1">'/api/v1/auth/token/refresh/'</span>
+</code></pre>
+<p>We use a token based authentication based on JWT (Javascript Web tokens). After a username and password is given, the endpoints described in the table below are used for the authentication. The token has a an expiry period of 12 hours though this can be changed to suite the integration. To call any other endpoint, a valid bearer token  must be sent on the authorization headers in order for the request to succeed as shown in example below using curl:</p>
+
+<aside class="notice">
+<code>curl -X GET --header 'Authorization: Bearer token ' 'http://somegetapiendpoint.com/api/v1'</code>
+</aside>
+
+<table><thead>
+<tr>
+<th>EndPoint</th>
+<th>Method</th>
+<th>Response</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>api/v1/auth/login</td>
+<td>POST</td>
+<td><code>{&quot;token&quot;:&lt;token&gt;}</code></td>
+<td>Returns a valid token after a username and password is posted.</td>
+</tr>
+<tr>
+<td>api/v1/auth/token/refresh/</td>
+<td>POST</td>
+<td><code>{&quot;token&quot;:&lt;token&gt;}</code></td>
+<td>Returns a refreshed token (with new expiration) based on posted token</td>
+</tr>
+<tr>
+<td>api/v1/auth/token/verify</td>
+<td>POST</td>
+<td><code>{&quot;token&quot;:&lt;token&gt;}</code></td>
+<td>Checks the veracity of a token, returning the token if it is valid</td>
 </tr>
 </tbody></table>
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+A succesfull call to any of the endpoints above returns a token e.g
+<code>{
+  "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IkFkbWluIiwiZXhwIjoxNTE5MzgyMzE3LCJlbWFpbCI6InRlY2hAeXVtLmNvLmtlIn0.-2-P6mP7JO-dIiBt5-HyWC41HT9KqtTjTrsaKsbpFLc"
+}</code>
 </aside>
-<h2 id='get-a-specific-kitten'>Get a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
+<h2 id='orders'>Orders</h2>
+<p>The REST API provides endpoints for creating, updating, querying and cancelling orders. Once the dispatch process begins, changes on the orders are send back as webhooks to callback configured by the client.</p>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Get orders</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Max"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"breed"</span><span class="p">:</span><span class="w"> </span><span class="s2">"unknown"</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"fluffiness"</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"cuteness"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint retrieves a specific kitten.</p>
-
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-<h3 id='http-request-2'>HTTP Request</h3>
-<p><code>GET http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters'>URL Parameters</h3>
+<pre class="highlight shell tab-shell"><code>curl -X GET --header <span class="s1">'Accept: application/json'</span> --header <span class="s1">'Authorization: Bearer token '</span> <span class="s1">'/api/v1/orders/?limit=50&amp;offset=50'</span>
+</code></pre><h3 id='get-api-v1-orders'><code> GET /api/v1/orders/ </code></h3>
+<p>Get a list of all orders at the resource <code>/api/v1/orders/</code>. Requires a valid authorization token to be sent in the headers.</p>
+<h4 id='query-parameters'>Query Parameters</h4>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to retrieve</td>
+<td>limit</td>
+<td>integer</td>
+<td>Number of results to return per page.</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>integer</td>
+<td>The initial index from which to return the results</td>
+</tr>
+<tr>
+<td>today_only</td>
+<td>string</td>
+<td>Filters orders for today only. Takes the value <code>&#39;True&#39;</code> when used</td>
+</tr>
+<tr>
+<td>state</td>
+<td>integer</td>
+<td>An order state value to filter for. The various order state numbers are listed in the table for order states</td>
+</tr>
+<tr>
+<td>ordering</td>
+<td>string</td>
+<td>Which field to use when ordering the results</td>
+</tr>
+<tr>
+<td>search</td>
+<td>string</td>
+<td>A search term.</td>
 </tr>
 </tbody></table>
-<h2 id='delete-a-specific-kitten'>Delete a Specific Kitten</h2><pre class="highlight ruby tab-ruby"><code><span class="nb">require</span> <span class="s1">'kittn'</span>
 
-<span class="n">api</span> <span class="o">=</span> <span class="no">Kittn</span><span class="o">::</span><span class="no">APIClient</span><span class="p">.</span><span class="nf">authorize!</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="p">.</span><span class="nf">kittens</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">kittn</span>
-
-<span class="n">api</span> <span class="o">=</span> <span class="n">kittn</span><span class="o">.</span><span class="n">authorize</span><span class="p">(</span><span class="s">'meowmeowmeow'</span><span class="p">)</span>
-<span class="n">api</span><span class="o">.</span><span class="n">kittens</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
-</code></pre><pre class="highlight shell tab-shell"><code>curl <span class="s2">"http://example.com/api/kittens/2"</span>
-  -X DELETE
-  -H <span class="s2">"Authorization: meowmeowmeow"</span>
-</code></pre><pre class="highlight javascript tab-javascript"><code><span class="kr">const</span> <span class="nx">kittn</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">'kittn'</span><span class="p">);</span>
-
-<span class="kd">let</span> <span class="nx">api</span> <span class="o">=</span> <span class="nx">kittn</span><span class="p">.</span><span class="nx">authorize</span><span class="p">(</span><span class="s1">'meowmeowmeow'</span><span class="p">);</span>
-<span class="kd">let</span> <span class="nx">max</span> <span class="o">=</span> <span class="nx">api</span><span class="p">.</span><span class="nx">kittens</span><span class="p">.</span><span class="k">delete</span><span class="p">(</span><span class="mi">2</span><span class="p">);</span>
-</code></pre>
 <blockquote>
-<p>The above command returns JSON structured like this:</p>
+<p>Response Status-Code: 200 OK</p>
 </blockquote>
-<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"deleted"</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">":("</span><span class="w">
-</span><span class="p">}</span><span class="w">
-</span></code></pre>
-<p>This endpoint deletes a specific kitten.</p>
-<h3 id='http-request-3'>HTTP Request</h3>
-<p><code>DELETE http://example.com/kittens/&lt;ID&gt;</code></p>
-<h3 id='url-parameters-2'>URL Parameters</h3>
+<pre class="highlight shell tab-shell"><code><span class="o">{</span>
+  <span class="s2">"count"</span>: 6426,
+  <span class="s2">"next"</span>: <span class="s2">"/api/v1/orders/?limit=50&amp;offset=100"</span>,
+  <span class="s2">"previous"</span>: <span class="s2">"/api/v1/orders/?limit=50"</span>,
+  <span class="s2">"results"</span>: <span class="o">[</span>
+      <span class="o">{</span>
+        // Order object <span class="o">(</span>omitted <span class="k">for </span>clarity<span class="o">)</span>
+      <span class="o">}</span>,
+     // ... Order objects
+    <span class="o">]</span>
+<span class="o">}</span>
+
+</code></pre><h3 id='response'>Response</h3>
 <table><thead>
 <tr>
-<th>Parameter</th>
+<th>Name</th>
+<th>Type</th>
 <th>Description</th>
 </tr>
 </thead><tbody>
 <tr>
-<td>ID</td>
-<td>The ID of the kitten to delete</td>
+<td>count</td>
+<td>integer</td>
+<td>Total number of items available.</td>
+</tr>
+<tr>
+<td>next</td>
+<td>string</td>
+<td>Link to the next set of items</td>
+</tr>
+<tr>
+<td>previous</td>
+<td>string</td>
+<td>Link to the previous set of items</td>
+</tr>
+<tr>
+<td>results</td>
+<td>array</td>
+<td>List of order objects, sorted in reverse chronological order by time of creation.</td>
+</tr>
+</tbody></table>
+<h3 id='post-api-v1-orders'><code> POST /api/v1/orders/ </code></h3>
+<p>Creates an order object with a POST to the resource <code>/api/v1/orders/</code>. Requires a valid authorization token to be sent in the headers.</p>
+
+<blockquote>
+<p>Create An Order</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X POST --header <span class="s1">'Content-Type: application/json'</span> --header <span class="s1">'Authorization: Bearer token'</span> -d <span class="s1">'{ \ 
+   "order_ref": "1589274", \ 
+   "state": 1, \ 
+   "order_total": "4600.00", \ 
+   "branch": 208, \ 
+   "items": [ \ 
+     { \ 
+       "quantity": 3, \ 
+       "title": "Streetwise Two", \ 
+       "instructions": "Zinger", \ 
+       "price": "1450.00" \ 
+     } \ 
+   ], \ 
+   "customer": { \ 
+     "first_name": "Leon", \ 
+     "last_name": "Bareham", \ 
+     "phone": "+254719619017" \ 
+   }, \ 
+   "source": 1, \ 
+   "extra_information": "", \ 
+   "payment_method": 1, \ 
+   "payment_status": 1, \ 
+   "address": { \ 
+     "lat": "-1.279533800000000", \ 
+     "log": "36.789020100000000", \ 
+     "address": "Street Name: Kenton College, Gichugu Road, Cross Street: kieni rd, Apartment: Leon%27s House, Other Instructions: Please ask security at the Main Gate to direct you to Leon%27s house. thank you." \ 
+        \ 
+   }  \ 
+ }'</span> <span class="s1">'/api/v1/orders/'</span>
+
+</code></pre><h4 id='post-parameters'>POST parameters</h4>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_ref</td>
+<td>string</td>
+<td>A client internal order id. Must be unique for each order. This field is required.</td>
+</tr>
+<tr>
+<td>state</td>
+<td>integer</td>
+<td>A number representing an order state . The various states meanings are in the order states table. This field is required.</td>
+</tr>
+<tr>
+<td>source</td>
+<td>integer</td>
+<td>A special integer assigned to the to client for each API connecting to the logistics. This is required.</td>
+</tr>
+<tr>
+<td>branch</td>
+<td>integer</td>
+<td>A branch id as configured as part masterdata configuration. Is the client ID for branch the order has been placed</td>
+</tr>
+<tr>
+<td>order_total</td>
+<td>float</td>
+<td>The order total cost paid or to be paid by the customer.</td>
+</tr>
+<tr>
+<td>extra_information</td>
+<td>string</td>
+<td>Any Additional instructions for the order. This field is optional</td>
+</tr>
+<tr>
+<td>payment_method</td>
+<td>integer</td>
+<td>A number representing the payment method used by the customer for the order as documented in the payment methods table. This field is optional</td>
+</tr>
+<tr>
+<td>payment_status</td>
+<td>integer</td>
+<td>A number representing the payment status of the order as documented in the payment methods table.</td>
+</tr>
+<tr>
+<td>items</td>
+<td>object</td>
+<td>The items being delivered</td>
+</tr>
+<tr>
+<td>items.quantity</td>
+<td>integer</td>
+<td>The number of this item</td>
+</tr>
+<tr>
+<td>items.title</td>
+<td>string</td>
+<td>The title of the item. Limited to 128 characters.</td>
+</tr>
+<tr>
+<td>items.price</td>
+<td>float</td>
+<td>The price of the Item</td>
+</tr>
+<tr>
+<td>items.instructions</td>
+<td>string</td>
+<td>Additional information specific to this iye</td>
+</tr>
+<tr>
+<td>customer</td>
+<td>object</td>
+<td>The order&#39;s Customer</td>
+</tr>
+<tr>
+<td>customer.first_name</td>
+<td>string</td>
+<td>customer first name</td>
+</tr>
+<tr>
+<td>customer.last_name</td>
+<td>string</td>
+<td>Customer last name</td>
+</tr>
+<tr>
+<td>customer.phone</td>
+<td>string</td>
+<td>customer phone number in international format</td>
+</tr>
+<tr>
+<td>address</td>
+<td>object</td>
+<td>The delivery address</td>
+</tr>
+<tr>
+<td>address.lat</td>
+<td>float</td>
+<td>The map latitude of the delivery address</td>
+</tr>
+<tr>
+<td>address.log</td>
+<td>float</td>
+<td>The map longitude of the delivery address</td>
+</tr>
+<tr>
+<td>address.address</td>
+<td>string</td>
+<td>The address with the preferred format of House Number, Street Direction, Street Name, Street Suffix, City, State, Zip, Country</td>
+</tr>
+</tbody></table>
+
+<blockquote>
+<p>Response status code 200</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"order_ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1591444"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state_display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Waiting order preparation"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"020f5d58-aa9b-4b2c-8625-742525ce98fa"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"order_total"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1070.00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"branch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Snacks - Crunch Burger"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"300.00"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"colonel, sweet chilli or zinger dressing - zinger dressing."</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Snacks - Crispy Fillets."</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"390.00"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">"3 pieces"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"title"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Krushers - Oreo Krusher"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"280.00"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"instructions"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">],</span><span class="w">
+      </span><span class="s2">"customer"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"JOSE"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">".Handoyo"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"phone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"+254719619017"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"source"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"extra_information"</span><span class="p">:</span><span class="w"> </span><span class="s2">"#M"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"rider"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"created_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-31 13:09:30.928587+00:00"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"branch_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"KFC Waiyaki Way"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"branch_address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"lat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.258591700000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36.781353300000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Waiyaki Way"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address_json"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+          </span><span class="s2">"Waiyaki Way"</span><span class="w">
+        </span><span class="p">]</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"payment_status"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"payment_status_display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PAID"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"lat"</span><span class="p">:</span><span class="w"> </span><span class="s2">"-1.258695600000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"log"</span><span class="p">:</span><span class="w"> </span><span class="s2">"36.781334100000000"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Street Name: Waiyaki Way, Cross Street: MUTHANGARI DRIVE, Apartment: MUTHANGARI RESIDENCE, Apartment #: UNIT 5, Other Instructions: RIGHT BEHIND WEST END TOWERS."</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"address_json"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+          </span><span class="s2">"apartment#"</span><span class="p">:</span><span class="w"> </span><span class="s2">" UNIT 5"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"apartment"</span><span class="p">:</span><span class="w"> </span><span class="s2">" MUTHANGARI RESIDENCE"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"streetname"</span><span class="p">:</span><span class="w"> </span><span class="s2">" Waiyaki Way"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"crossstreet"</span><span class="p">:</span><span class="w"> </span><span class="s2">" MUTHANGARI DRIVE"</span><span class="p">,</span><span class="w">
+          </span><span class="s2">"otherinstructions"</span><span class="p">:</span><span class="w"> </span><span class="s2">" RIGHT BEHIND WEST END TOWERS."</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"updated_date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2018-01-31T13:10:24.615336Z"</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+</span></code></pre><h3 id='order-states-description'>Order States Description</h3>
+<table><thead>
+<tr>
+<th>States</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>SUBMITTED. An order just submitted by a customer</td>
+</tr>
+<tr>
+<td>2</td>
+<td>ACCEPTED_BY_RESTAURANT . Order accepted by restaurant awaiting preparation</td>
+</tr>
+<tr>
+<td>3</td>
+<td>READY_FOR_PICKUP. An order has been prepared an is awaiting pick up</td>
+</tr>
+<tr>
+<td>4</td>
+<td>ASSIGNED_TO_RIDER . Order assigned to a rider pending acceptance</td>
+</tr>
+<tr>
+<td>5</td>
+<td>ACCEPTED_BY_RIDER . Order accepted by the assigned rider</td>
+</tr>
+<tr>
+<td>6</td>
+<td>PICKED_UP. Order has been picked up and on the way to the customer.</td>
+</tr>
+<tr>
+<td>7</td>
+<td>DELIVERED. Order has been delivered</td>
+</tr>
+<tr>
+<td>8</td>
+<td>CANCELLED. Order cancelled</td>
+</tr>
+</tbody></table>
+<h3 id='payment-states-description'>Payment states Description</h3>
+<table><thead>
+<tr>
+<th>States</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>PAID. The order has already paid by client.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>UNPAID. The order hasn&#39;t been paid for yet, rider to collect payment upon delivery</td>
+</tr>
+</tbody></table>
+<h3 id='extra-fields-of-order-object-in-response'>Extra fields of order object in response</h3>
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>state_display</td>
+<td>string</td>
+<td>The description of the order state integer representation</td>
+</tr>
+<tr>
+<td>order_id</td>
+<td>string(uuid)</td>
+<td>Yum logistics order id</td>
+</tr>
+<tr>
+<td>source</td>
+<td>id</td>
+<td>The db id of the API that posted the order</td>
+</tr>
+<tr>
+<td>rider</td>
+<td>object</td>
+<td>Rider object: null if no rider assigned rider object if assigned</td>
+</tr>
+<tr>
+<td>branch_name</td>
+<td>string</td>
+<td>The name of the branch for the order</td>
+</tr>
+<tr>
+<td>created_date</td>
+<td>string</td>
+<td>Order creation date with timezone</td>
+</tr>
+<tr>
+<td>updated_date</td>
+<td>string</td>
+<td>Order update date with timezone</td>
+</tr>
+<tr>
+<td>payment_status_display</td>
+<td>string</td>
+<td>Order payment status description</td>
+</tr>
+</tbody></table>
+<h2 id='get-orders-order_id'><code>GET /orders/{order_id}/</code></h2>
+<p>Gets a specific order</p>
+<h2 id='webhooks'>Webhooks</h2>
+<blockquote>
+<p>Example POST request</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="s2">"order_id"</span><span class="p">:</span><span class="s2">"78399303"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"state"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"url"</span><span class="p">:</span><span class="s2">"https://trck.at/7BWnF9JX"</span><span class="w">
+
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+<p>Notifications are sent once the order state change as web hooks. The client should configure a callbak url to update the order status on their end with these new status. The webhooks notifications are sent as HTTP POST requests to the client server. Tracking URLs for picked up orders are also sent for sharing with the client to live track the client locations.</p>
+
+<aside class="notice">
+<code> Callback specification and limitations e.g Authorization Scheme to API will be provided by the client</code>
+</aside>
+<h3 id='json-body-parameters'>JSON Body parameters</h3>
+<p>The format of the JSON has POST the parameters outlined below:</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_id</td>
+<td>string</td>
+<td>The clients order id</td>
+</tr>
+<tr>
+<td>state</td>
+<td>integer</td>
+<td>The current order state</td>
+</tr>
+<tr>
+<td>url</td>
+<td>string</td>
+<td>Tracking url</td>
+</tr>
+</tbody></table>
+<h2 id='riders'>Riders</h2>
+<blockquote>
+<p>Check if rider is available for a checkout about to compeleted by client</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>
+curl -X GET --header <span class="s1">'Accept: application/json'</span> --header <span class="s1">'Content-Type: application/json'</span> <span class="s1">'/api/v1/available-riders/{branch_id}/'</span>
+
+</code></pre>
+<p>To check a rider availability for a client checking out, we need to send the information of the  branch the client is checking out.
+<code>GET /api/v1/available-riders/{branch_id}/</code></p>
+<h4 id='response-2'>Response</h4>
+<blockquote>
+<p>Response status_code: 200 OK</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="w">
+</span><span class="p">{</span><span class="w">
+  </span><span class="s2">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"next"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="s2">"user"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+        </span><span class="s2">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Harrison"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Kimani"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"phone_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0742392231"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"username"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0742392231"</span><span class="p">,</span><span class="w">
+        </span><span class="s2">"role"</span><span class="p">:</span><span class="w"> </span><span class="s2">"riders"</span><span class="w">
+      </span><span class="p">},</span><span class="w">
+      </span><span class="s2">"state"</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"state_display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Free for assignment"</span><span class="p">,</span><span class="w">
+      </span><span class="s2">"distance"</span><span class="p">:</span><span class="mf">100.00</span><span class="p">,</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+<p>Returns list of available riders ordered by the proximity to the store in an ascending order. The rider object in the response has the following fields.</p>
+
+<table><thead>
+<tr>
+<th>Name</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>user</td>
+<td>object</td>
+<td>User object for this rider</td>
+</tr>
+<tr>
+<td>user.first_name</td>
+<td>string</td>
+<td>Riders first name</td>
+</tr>
+<tr>
+<td>user.last_name</td>
+<td>string</td>
+<td>Rider last name</td>
+</tr>
+<tr>
+<td>user.phone_number</td>
+<td>string</td>
+<td>Rider phone numbe</td>
+</tr>
+<tr>
+<td>user.role</td>
+<td>string</td>
+<td>The role of &quot;rider&quot;</td>
+</tr>
+<tr>
+<td>state</td>
+<td>integer</td>
+<td>An integer representation of the riders state</td>
+</tr>
+<tr>
+<td>state_display</td>
+<td>string</td>
+<td>An explanation of the rrider state</td>
+</tr>
+<tr>
+<td>distance</td>
+<td>float</td>
+<td>The distance of the rider from the store</td>
 </tr>
 </tbody></table>
 <h1 id='errors'>Errors</h1>
-<aside class="notice">This error section is stored in a separate file in `includes/_errors.md`. Slate allows you to optionally separate out your docs into many files...just save them to the `includes` folder and add them to the top of your `index.md`'s frontmatter. Files are included in the order listed.</aside>
-
-<p>The Kittn API uses the following error codes:</p>
+<p>The Yum Logistics API uses the following error codes:</p>
 
 <table><thead>
 <tr>
@@ -445,23 +1003,23 @@ Remember — a happy kitten is an authenticated kitten!
 </thead><tbody>
 <tr>
 <td>400</td>
-<td>Bad Request -- Your request sucks.</td>
+<td>Bad Request -- Your request is invalid.</td>
 </tr>
 <tr>
 <td>401</td>
-<td>Unauthorized -- Your API key is wrong.</td>
+<td>Unauthorized -- Your token key is invalid.</td>
 </tr>
 <tr>
 <td>403</td>
-<td>Forbidden -- The kitten requested is hidden for administrators only.</td>
+<td>Forbidden -- The requested resource is not allowed to you.</td>
 </tr>
 <tr>
 <td>404</td>
-<td>Not Found -- The specified kitten could not be found.</td>
+<td>Not Found -- The specified object could not be found.</td>
 </tr>
 <tr>
 <td>405</td>
-<td>Method Not Allowed -- You tried to access a kitten with an invalid method.</td>
+<td>Method Not Allowed -- You tried to access a resource with an invalid method.</td>
 </tr>
 <tr>
 <td>406</td>
@@ -469,7 +1027,7 @@ Remember — a happy kitten is an authenticated kitten!
 </tr>
 <tr>
 <td>410</td>
-<td>Gone -- The kitten requested has been removed from our servers.</td>
+<td>Gone -- The item requested has been removed from our servers.</td>
 </tr>
 <tr>
 <td>418</td>
@@ -493,9 +1051,6 @@ Remember — a happy kitten is an authenticated kitten!
       <div class="dark-box">
           <div class="lang-selector">
                 <a href="#" data-language-name="shell">shell</a>
-                <a href="#" data-language-name="ruby">ruby</a>
-                <a href="#" data-language-name="python">python</a>
-                <a href="#" data-language-name="javascript">javascript</a>
           </div>
       </div>
     </div>
