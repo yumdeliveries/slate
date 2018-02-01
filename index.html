@@ -242,9 +242,6 @@
                     <a href="#orders" class="toc-h2 toc-link" data-title="orders">Orders</a>
                   </li>
                   <li>
-                    <a href="#get-orders-order_id" class="toc-h2 toc-link" data-title="code-get-orders-order_id-code"><code>GET /orders/{order_id}/</code></a>
-                  </li>
-                  <li>
                     <a href="#webhooks" class="toc-h2 toc-link" data-title="webhooks">Webhooks</a>
                   </li>
                   <li>
@@ -279,7 +276,7 @@
 <tr>
 <td>Order Processing</td>
 <td>API</td>
-<td>Enable Client to Create, Update and Retrieve orders to the logistics platform.</td>
+<td>Enable Client to Create, Update and Retrieve orders on the logistics platform.</td>
 </tr>
 <tr>
 <td>Rider Availability</td>
@@ -312,7 +309,7 @@
 </thead><tbody>
 <tr>
 <td>name</td>
-<td>The name of the organisation eg KFC</td>
+<td>The name of the organisation e.g. KFC</td>
 </tr>
 <tr>
 <td>mapping_id</td>
@@ -336,7 +333,7 @@
 </tr>
 <tr>
 <td>mapping_id</td>
-<td>the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on</td>
+<td>the client ID of the organisation e.g. 1 . Incase where we have one organisation a default can be agreed on</td>
 </tr>
 <tr>
 <td>description</td>
@@ -372,8 +369,8 @@
   The client will share the master data items in a an excel/csv document for the automated population to the database.
 </aside>
 <h1 id='api'>API</h1>
-<p>We offer a RESTful api to interact with the logistics platform, that speaks exclusively in JSON. Any request to the API endpoints need to be authenticated.
-A Sandbox will be provided for testing the API and in order to facilitate the integration.</p>
+<p>We offer a RESTful api to interact with the logistics platform, that speaks exclusively in JSON. Any request to the API endpoints needs to be authenticated.
+A Sandbox will be provided for testing the API to facilitate the integration.</p>
 
 <aside class="notice">
   Since the API is exclusively JSON, you  should always set the <code>Content-Type</code> header to <code>application/json</code> to ensure that your requests are properly accepted and processed by the API
@@ -863,7 +860,7 @@ A succesfull call to any of the endpoints above returns a token e.g
 <td>Order payment status description</td>
 </tr>
 </tbody></table>
-<h2 id='get-orders-order_id'><code>GET /orders/{order_id}/</code></h2>
+<h3 id='get-orders-order_id'><code>GET /orders/{order_id}/</code></h3>
 <p>Gets a specific order</p>
 <h2 id='webhooks'>Webhooks</h2>
 <blockquote>
