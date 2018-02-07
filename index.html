@@ -254,7 +254,7 @@
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>We shall provide a username and password for the sandbo and production environments </a></li>
+            <li><a href='#'>We shall provide a username and password for the sandbox and production environments </a></li>
             <li><a href='#'> &copy;2018 Yum Deliveries LTD</a></li>
         </ul>
     </div>
@@ -313,7 +313,7 @@
 </tr>
 <tr>
 <td>mapping_id</td>
-<td>the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on</td>
+<td>the unique client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on</td>
 </tr>
 <tr>
 <td>description</td>
@@ -329,11 +329,11 @@
 </thead><tbody>
 <tr>
 <td>name</td>
-<td>The name of the organisation eg KFC</td>
+<td>The name of the branch eg KFC- Branch One</td>
 </tr>
 <tr>
 <td>mapping_id</td>
-<td>the client ID of the organisation e.g. 1 . Incase where we have one organisation a default can be agreed on</td>
+<td>the clients unique ID for each branch.</td>
 </tr>
 <tr>
 <td>description</td>
@@ -341,7 +341,7 @@
 </tr>
 <tr>
 <td>organisation</td>
-<td>The branch the organisation belongs to</td>
+<td>The organisation the branch belongs to</td>
 </tr>
 <tr>
 <td>phone_number</td>
@@ -407,7 +407,7 @@ curl <span class="s2">"/api/v1/auth/login/"</span>
    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IkFkbWluIiwiZXhwIjoxNTE5MzgyMzE3LCJlbWFpbCI6InRlY2hAeXVtLmNvLmtlIn0.-2-P6mP7JO-dIiBt5-HyWC41HT9KqtTjTrsaKsbpFLc" \ 
  }'</span> <span class="s1">'/api/v1/auth/token/refresh/'</span>
 </code></pre>
-<p>We use a token based authentication based on JWT (Javascript Web tokens). After a username and password is given, the endpoints described in the table below are used for the authentication. The token has a an expiry period of 12 hours though this can be changed to suite the integration. To call any other endpoint, a valid bearer token  must be sent on the authorization headers in order for the request to succeed as shown in example below using curl:</p>
+<p>We use a token based authentication based on JWT (JSON Web tokens). After a username and password is given, the endpoints described in the table below are used for the authentication. The token has a an expiry period of 12 hours though this can be changed to suite the integration. To call any other endpoint, a valid bearer token  must be sent on the authorization headers in order for the request to succeed as shown in example below using curl:</p>
 
 <aside class="notice">
 <code>curl -X GET --header 'Authorization: Bearer token ' 'http://somegetapiendpoint.com/api/v1'</code>
@@ -909,7 +909,7 @@ A succesfull call to any of the endpoints above returns a token e.g
 <p>Check if rider is available for a checkout about to compeleted by client</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
-curl -X GET --header <span class="s1">'Accept: application/json'</span> --header <span class="s1">'Content-Type: application/json'</span> <span class="s1">'/api/v1/available-riders/{branch_id}/'</span>
+curl -X GET --header <span class="s1">'Accept: application/json'</span> --header <span class="s1">'Content-Type: application/json'</span>  --header <span class="s1">'Authorization: Bearer token'</span> <span class="s1">'/api/v1/available-riders/{branch_id}/'</span>
 
 </code></pre>
 <p>To check a rider availability for a client checking out, we need to send the information of the  branch the client is checking out.
@@ -989,6 +989,10 @@ curl -X GET --header <span class="s1">'Accept: application/json'</span> --header
 <td>The distance of the rider from the store</td>
 </tr>
 </tbody></table>
+
+<aside class="notice">
+The riders endpoint requires authentication details to be sent on the headers too.
+</aside>
 <h1 id='errors'>Errors</h1>
 <p>The Yum Logistics API uses the following error codes:</p>
 
