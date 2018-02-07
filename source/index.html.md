@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href='#'>We shall provide a username and password for the sandbo and production environments </a>
+  - <a href='#'>We shall provide a username and password for the sandbox and production environments </a>
   - <a href='#'> &copy;2018 Yum Deliveries LTD</a>
 
 includes:
@@ -40,17 +40,17 @@ The branches are saved together with their addresses which are used when request
 Name | Description
 --------- | -----------
 name | The name of the organisation e.g. KFC
-mapping_id | the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on
+mapping_id | the unique client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on
 description | an optional description of the organisation
 
 ## Branch object data fields
 
 Name | Description
 --------- | -----------
-name | The name of the organisation eg KFC
-mapping_id | the client ID of the organisation e.g. 1 . Incase where we have one organisation a default can be agreed on
+name | The name of the branch eg KFC- Branch One
+mapping_id | the clients unique ID for each branch.
 description | an optional description of the organisation
-organisation | The branch the organisation belongs to
+organisation | The organisation the branch belongs to
 phone_number | An optional contact number to the branch
 location | The location object of the branch
 location.lat | The map latitude of the branchs location
@@ -108,7 +108,7 @@ curl -X POST --header 'Content-Type: application/json' -d '{ \
  }' '/api/v1/auth/token/refresh/'
  ```
 
-We use a token based authentication based on JWT (Javascript Web tokens). After a username and password is given, the endpoints described in the table below are used for the authentication. The token has a an expiry period of 12 hours though this can be changed to suite the integration. To call any other endpoint, a valid bearer token  must be sent on the authorization headers in order for the request to succeed as shown in example below using curl:
+We use a token based authentication based on JWT (JSON Web tokens). After a username and password is given, the endpoints described in the table below are used for the authentication. The token has a an expiry period of 12 hours though this can be changed to suite the integration. To call any other endpoint, a valid bearer token  must be sent on the authorization headers in order for the request to succeed as shown in example below using curl:
 
 <aside class="notice">
 <code>curl -X GET --header 'Authorization: Bearer token ' 'http://somegetapiendpoint.com/api/v1'</code>
@@ -391,7 +391,7 @@ url | string | Tracking url
 
 ```shell
 
-curl -X GET --header 'Accept: application/json' --header 'Content-Type: application/json' '/api/v1/available-riders/{branch_id}/'
+curl -X GET --header 'Accept: application/json' --header 'Content-Type: application/json'  --header 'Authorization: Bearer token' '/api/v1/available-riders/{branch_id}/'
 
 ```
 
@@ -438,3 +438,7 @@ user.role | string | The role of "rider"
 state| integer | An integer representation of the riders state
 state_display | string | An explanation of the rrider state
 distance | float | The distance of the rider from the store
+
+<aside class="notice">
+The riders endpoint requires authentication details to be sent on the headers too.
+</aside>
