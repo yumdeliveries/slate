@@ -398,7 +398,7 @@ curl -X PATCH --header 'Content-Type: application/json' --header 'Authorization:
 
 ## Webhooks
 
-> Example POST request
+> Example webhook POST request
 
 ```json
 {
