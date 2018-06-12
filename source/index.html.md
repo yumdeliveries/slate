@@ -5,7 +5,7 @@ language_tabs: # must be one of https://git.io/vQNgJ
   - shell
 
 toc_footers:
-  - <a href='#'>We shall provide a username and password for the sandbox and production environments </a>
+  - <a href='#'>We shall </a>
   - <a href='#'> &copy;2018 Yum Deliveries LTD</a>
 
 includes:
@@ -22,7 +22,7 @@ The Yum Logistics API enables you to integate your ordering platform to Yum Logi
 
 Service | Integration | Description
 --------- | ------- | -----------
-Order Processing | API | Enable Client to Create, Update and Retrieve orders on the logistics platform.
+Order Processing | API | Enable Client to Create, Update and Retrieve orders to the logistics platform.
 Rider Availability | API | Enable  Client to query riders availability relative to a specific location
 Order Status Notifications | Web Hook | Notify the client when an order status changes in real time.
 Master Data Mapping | Configuration | Match organisations and branches for metrics tracking.
@@ -39,18 +39,18 @@ The branches are saved together with their addresses which are used when request
 
 Name | Description
 --------- | -----------
-name | The name of the organisation e.g. KFC
-mapping_id | the unique client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on
+name | The name of the organisation eg KFC
+mapping_id | the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on
 description | an optional description of the organisation
 
 ## Branch object data fields
 
 Name | Description
 --------- | -----------
-name | The name of the branch eg KFC- Branch One
-mapping_id | the clients unique ID for each branch.
+name | The name of the organisation eg KFC
+mapping_id | the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on
 description | an optional description of the organisation
-organisation | The organisation the branch belongs to
+organisation | The branch the organisation belongs to
 phone_number | An optional contact number to the branch
 location | The location object of the branch
 location.lat | The map latitude of the branchs location
@@ -64,8 +64,8 @@ location.address | The address info with format of House Number, Street Directio
 
 # API 
 
-We offer a RESTful api to interact with the logistics platform, that speaks exclusively in JSON. Any request to the API endpoints needs to be authenticated.
-A Sandbox will be provided for testing the API to facilitate the integration.
+We offer a RESTful api to interact with the logistics platform, that speaks exclusively in JSON. Any request to the API endpoints need to be authenticated.
+A Sandbox will be provided for testing the API and in order to facilitate the integration.
 
 <aside class="notice">
   Since the API is exclusively JSON, you  should always set the <code>Content-Type</code> header to <code>application/json</code> to ensure that your requests are properly accepted and processed by the API
@@ -108,7 +108,7 @@ curl -X POST --header 'Content-Type: application/json' -d '{ \
  }' '/api/v1/auth/token/refresh/'
  ```
 
-We use a token based authentication based on JWT (JSON Web tokens). After a username and password is given, the endpoints described in the table below are used for the authentication. The token has a an expiry period of 12 hours though this can be changed to suite the integration. To call any other endpoint, a valid bearer token  must be sent on the authorization headers in order for the request to succeed as shown in example below using curl:
+We use a token based authentication based on JWT (Javascript Web tokens). After a username and password is given, the endpoints described in the table below are used for the authentication. The token has a an expiry period of 12 hours though this can be changed to suite the integration. To call any other endpoint, a valid bearer token  must be sent on the authorization headers in order for the request to succeed as shown in example below using curl:
 
 <aside class="notice">
 <code>curl -X GET --header 'Authorization: Bearer token ' 'http://somegetapiendpoint.com/api/v1'</code>
@@ -139,7 +139,7 @@ curl -X GET --header 'Accept: application/json' --header 'Authorization: Bearer 
 
 
 
-### <code> GET /api/v1/orders/ </code>
+## <code> GET /api/v1/orders/ </code>
 
 Get a list of all orders at the resource <code>/api/v1/orders/</code>. Requires a valid authorization token to be sent in the headers.
 
@@ -181,7 +181,7 @@ previous | string |Link to the previous set of items
 results | array | List of order objects, sorted in reverse chronological order by time of creation.
 
 
-### <code> POST /api/v1/orders/ </code>
+## <code> POST /api/v1/orders/ </code>
 
 Creates an order object with a POST to the resource <code>/api/v1/orders/</code>. Requires a valid authorization token to be sent in the headers.
 
@@ -328,6 +328,9 @@ States | Description
 7 | DELIVERED. Order has been delivered 
 8 | CANCELLED. Order cancelled
 
+<aside class="warning">
+  Some states here may not be available depending on the the scope of integration. In such a case webhook notifications will only be sent for the applicable states.
+</aside>
 
 ### Payment states Description
 
@@ -336,22 +339,62 @@ States | Description
 1 | PAID. The order has already paid by client.
 2 | UNPAID. The order hasn't been paid for yet, rider to collect payment upon delivery
 
+### Payment methods Description
+
+States | Description
+--------- | -------
+1 | CASH. Order paid by cash.
+2 | MPESA. Mobile money payments. (Many not be applicable in some markets)
+3 | CARD. Card payments
+4 | UNAPPLICABLE. This is for unpaid orders where the driver updates the payment type upon receiving payment.
+
 ### Extra fields of order object in response
 
 Name | Type | Description
 --------- | ------- | -----------
 state_display | string | The description of the order state integer representation
 order_id | string(uuid) | Yum logistics order id
-source | id | The db id of the API that posted the order
+source | id | The identity of the API that posted the order
 rider | object | Rider object: null if no rider assigned rider object if assigned
 branch_name | string | The name of the branch for the order
 created_date | string | Order creation date with timezone
 updated_date | string | Order update date with timezone
 payment_status_display | string | Order payment status description
+tracking_url | string | Driver live location tracking url. Only available if order is in state 6 (PICKED_UP)
 
-### <code>GET /orders/{order_id}/</code>
+## <code>GET api/v1/orders/{order_id}/</code>
 
-Gets a specific order
+Gets a specific order. This order_id here refers to the Yum Logistics order id which is a uuid.
+
+> Get specific order object
+
+```shell
+curl -X GET --header 'Accept: application/json' --header 'Authorization: Bearer token ' '/api/v1/orders/b0899fba-aa03-4e1f-8985-75bfc470c355/'
+```
+> Response status code 200
+
+```json
+{
+  // Order object (omitted for clarity)
+}
+```
+
+## <code>PATCH api/v1/orders/{order_id}/</code>
+
+Updates any of the allowable fields for an order. This order_id here refers to the Yum Logistics order id which is a uuid.
+
+> Update an order object
+
+```shell
+curl -X PATCH --header 'Content-Type: application/json' --header 'Authorization: Bearer <token>' -d '{"state":2}' '/api/v1/orders/b0899fba-aa03-4e1f-8985-75bfc470c355/'
+```
+> Response status code 200
+
+```json
+{
+  // Order object (omitted for clarity)
+}
+```
 
 ## Webhooks
 
@@ -359,20 +402,20 @@ Gets a specific order
 
 ```json
 {
-  "order_id":"78399303",
+  "order_ref":"78399303",
   "state":6,
-  "url":"https://trck.at/7BWnF9JX"
+  "tracking_url":"https://trck.at/7BWnF9JX"
 
 }
 ```
 
-Notifications are sent once the order state change as web hooks. The client should configure a callbak url to update the order status on their end with these new status. The webhooks notifications are sent as HTTP POST requests to the client server. Tracking URLs for picked up orders are also sent for sharing with the client to live track the client locations.
+Your application receives a webhook notification whenever the status of an order changes. Webhooks notifications are sent as an HTTP POST request to your server.Once you implement and share the webhook endpoint, we configure it to receive notifications for all the orders created with your api details.
 
 <aside class="notice">
-<code> Callback specification and limitations e.g Authorization Scheme to API will be provided by the client</code>
+  When updating an order state on your server the steps are:
+  1. Consume the nofication via the webhook for the order change
+  2. Call the GET order api for the full details of the order object
 </aside>
-
-
 
 ### JSON Body parameters
 
@@ -380,9 +423,9 @@ The format of the JSON has POST the parameters outlined below:
 
 Name | Type | Description 
 --------- | ------- | -----------
-order_id | string | The clients order id
-state | integer | The current order state
-url | string | Tracking url 
+order_ref | string | The clients order id
+state | integer | The latest order order state
+tracking_url | string | Tracking url. This is only available when the order has been picked up by driver.
 
 
 ## Riders
@@ -391,11 +434,12 @@ url | string | Tracking url
 
 ```shell
 
-curl -X GET --header 'Accept: application/json' --header 'Content-Type: application/json'  --header 'Authorization: Bearer token' '/api/v1/available-riders/{branch_id}/'
+curl -X GET --header 'Accept: application/json' --header 'Content-Type: application/json' '/api/v1/available-riders/{branch_id}/'
 
 ```
 
 To check a rider availability for a client checking out, we need to send the information of the  branch the client is checking out.
+
 <code>GET /api/v1/available-riders/{branch_id}/</code>
 
 #### Response
@@ -422,11 +466,12 @@ To check a rider availability for a client checking out, we need to send the inf
       "state_display": "Free for assignment",
       "distance":100.00,
     }
-  }
+  ]
+}
 
 ```
 
-Returns list of available riders ordered by the proximity to the store in an ascending order. The rider object in the response has the following fields.
+Returns a list of available riders ordered by the proximity to the store in an ascending order. The rider object in the response has the following fields.
 
 Name | Type | Description 
 --------- | ------- | -----------
@@ -436,9 +481,5 @@ user.last_name | string | Rider last name
 user.phone_number | string | Rider phone numbe
 user.role | string | The role of "rider"
 state| integer | An integer representation of the riders state
-state_display | string | An explanation of the rrider state
+state_display | string | An explanation of the rider state
 distance | float | The distance of the rider from the store
-
-<aside class="notice">
-The riders endpoint requires authentication details to be sent on the headers too.
-</aside>
