@@ -242,6 +242,18 @@
                     <a href="#orders" class="toc-h2 toc-link" data-title="orders">Orders</a>
                   </li>
                   <li>
+                    <a href="#get-api-v1-orders" class="toc-h2 toc-link" data-title="code-get-api-v1-orders-code"><code> GET /api/v1/orders/ </code></a>
+                  </li>
+                  <li>
+                    <a href="#post-api-v1-orders" class="toc-h2 toc-link" data-title="code-post-api-v1-orders-code"><code> POST /api/v1/orders/ </code></a>
+                  </li>
+                  <li>
+                    <a href="#get-api-v1-orders-order_id" class="toc-h2 toc-link" data-title="code-get-api-v1-orders-order_id-code"><code>GET api/v1/orders/{order_id}/</code></a>
+                  </li>
+                  <li>
+                    <a href="#patch-api-v1-orders-order_id" class="toc-h2 toc-link" data-title="code-patch-api-v1-orders-order_id-code"><code>PATCH api/v1/orders/{order_id}/</code></a>
+                  </li>
+                  <li>
                     <a href="#webhooks" class="toc-h2 toc-link" data-title="webhooks">Webhooks</a>
                   </li>
                   <li>
@@ -254,7 +266,7 @@
           </li>
       </div>
         <ul class="toc-footer">
-            <li><a href='#'>We shall provide a username and password for the sandbox and production environments </a></li>
+            <li><a href='#'>We shall </a></li>
             <li><a href='#'> &copy;2018 Yum Deliveries LTD</a></li>
         </ul>
     </div>
@@ -276,7 +288,7 @@
 <tr>
 <td>Order Processing</td>
 <td>API</td>
-<td>Enable Client to Create, Update and Retrieve orders on the logistics platform.</td>
+<td>Enable Client to Create, Update and Retrieve orders to the logistics platform.</td>
 </tr>
 <tr>
 <td>Rider Availability</td>
@@ -309,11 +321,11 @@
 </thead><tbody>
 <tr>
 <td>name</td>
-<td>The name of the organisation e.g. KFC</td>
+<td>The name of the organisation eg KFC</td>
 </tr>
 <tr>
 <td>mapping_id</td>
-<td>the unique client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on</td>
+<td>the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on</td>
 </tr>
 <tr>
 <td>description</td>
@@ -329,11 +341,11 @@
 </thead><tbody>
 <tr>
 <td>name</td>
-<td>The name of the branch eg KFC- Branch One</td>
+<td>The name of the organisation eg KFC</td>
 </tr>
 <tr>
 <td>mapping_id</td>
-<td>the clients unique ID for each branch.</td>
+<td>the client ID of the organisation e.g 1 . Incase where we have one organisation a default can be agreed on</td>
 </tr>
 <tr>
 <td>description</td>
@@ -341,7 +353,7 @@
 </tr>
 <tr>
 <td>organisation</td>
-<td>The organisation the branch belongs to</td>
+<td>The branch the organisation belongs to</td>
 </tr>
 <tr>
 <td>phone_number</td>
@@ -369,8 +381,8 @@
   The client will share the master data items in a an excel/csv document for the automated population to the database.
 </aside>
 <h1 id='api'>API</h1>
-<p>We offer a RESTful api to interact with the logistics platform, that speaks exclusively in JSON. Any request to the API endpoints needs to be authenticated.
-A Sandbox will be provided for testing the API to facilitate the integration.</p>
+<p>We offer a RESTful api to interact with the logistics platform, that speaks exclusively in JSON. Any request to the API endpoints need to be authenticated.
+A Sandbox will be provided for testing the API and in order to facilitate the integration.</p>
 
 <aside class="notice">
   Since the API is exclusively JSON, you  should always set the <code>Content-Type</code> header to <code>application/json</code> to ensure that your requests are properly accepted and processed by the API
@@ -407,7 +419,7 @@ curl <span class="s2">"/api/v1/auth/login/"</span>
    "token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6IkFkbWluIiwiZXhwIjoxNTE5MzgyMzE3LCJlbWFpbCI6InRlY2hAeXVtLmNvLmtlIn0.-2-P6mP7JO-dIiBt5-HyWC41HT9KqtTjTrsaKsbpFLc" \ 
  }'</span> <span class="s1">'/api/v1/auth/token/refresh/'</span>
 </code></pre>
-<p>We use a token based authentication based on JWT (JSON Web tokens). After a username and password is given, the endpoints described in the table below are used for the authentication. The token has a an expiry period of 12 hours though this can be changed to suite the integration. To call any other endpoint, a valid bearer token  must be sent on the authorization headers in order for the request to succeed as shown in example below using curl:</p>
+<p>We use a token based authentication based on JWT (Javascript Web tokens). After a username and password is given, the endpoints described in the table below are used for the authentication. The token has a an expiry period of 12 hours though this can be changed to suite the integration. To call any other endpoint, a valid bearer token  must be sent on the authorization headers in order for the request to succeed as shown in example below using curl:</p>
 
 <aside class="notice">
 <code>curl -X GET --header 'Authorization: Bearer token ' 'http://somegetapiendpoint.com/api/v1'</code>
@@ -454,7 +466,7 @@ A succesfull call to any of the endpoints above returns a token e.g
 <p>Get orders</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>curl -X GET --header <span class="s1">'Accept: application/json'</span> --header <span class="s1">'Authorization: Bearer token '</span> <span class="s1">'/api/v1/orders/?limit=50&amp;offset=50'</span>
-</code></pre><h3 id='get-api-v1-orders'><code> GET /api/v1/orders/ </code></h3>
+</code></pre><h2 id='get-api-v1-orders'><code> GET /api/v1/orders/ </code></h2>
 <p>Get a list of all orders at the resource <code>/api/v1/orders/</code>. Requires a valid authorization token to be sent in the headers.</p>
 <h4 id='query-parameters'>Query Parameters</h4>
 <table><thead>
@@ -540,7 +552,7 @@ A succesfull call to any of the endpoints above returns a token e.g
 <td>List of order objects, sorted in reverse chronological order by time of creation.</td>
 </tr>
 </tbody></table>
-<h3 id='post-api-v1-orders'><code> POST /api/v1/orders/ </code></h3>
+<h2 id='post-api-v1-orders'><code> POST /api/v1/orders/ </code></h2>
 <p>Creates an order object with a POST to the resource <code>/api/v1/orders/</code>. Requires a valid authorization token to be sent in the headers.</p>
 
 <blockquote>
@@ -795,6 +807,10 @@ A succesfull call to any of the endpoints above returns a token e.g
 <td>CANCELLED. Order cancelled</td>
 </tr>
 </tbody></table>
+
+<aside class="warning">
+  Some states here may not be available depending on the the scope of integration. In such a case webhook notifications will only be sent for the applicable states.
+</aside>
 <h3 id='payment-states-description'>Payment states Description</h3>
 <table><thead>
 <tr>
@@ -809,6 +825,30 @@ A succesfull call to any of the endpoints above returns a token e.g
 <tr>
 <td>2</td>
 <td>UNPAID. The order hasn&#39;t been paid for yet, rider to collect payment upon delivery</td>
+</tr>
+</tbody></table>
+<h3 id='payment-methods-description'>Payment methods Description</h3>
+<table><thead>
+<tr>
+<th>States</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>1</td>
+<td>CASH. Order paid by cash.</td>
+</tr>
+<tr>
+<td>2</td>
+<td>MPESA. Mobile money payments. (Many not be applicable in some markets)</td>
+</tr>
+<tr>
+<td>3</td>
+<td>CARD. Card payments</td>
+</tr>
+<tr>
+<td>4</td>
+<td>UNAPPLICABLE. This is for unpaid orders where the driver updates the payment type upon receiving payment.</td>
 </tr>
 </tbody></table>
 <h3 id='extra-fields-of-order-object-in-response'>Extra fields of order object in response</h3>
@@ -832,7 +872,7 @@ A succesfull call to any of the endpoints above returns a token e.g
 <tr>
 <td>source</td>
 <td>id</td>
-<td>The db id of the API that posted the order</td>
+<td>The identity of the API that posted the order</td>
 </tr>
 <tr>
 <td>rider</td>
@@ -859,24 +899,57 @@ A succesfull call to any of the endpoints above returns a token e.g
 <td>string</td>
 <td>Order payment status description</td>
 </tr>
+<tr>
+<td>tracking_url</td>
+<td>string</td>
+<td>Driver live location tracking url. Only available if order is in state 6 (PICKED_UP)</td>
+</tr>
 </tbody></table>
-<h3 id='get-orders-order_id'><code>GET /orders/{order_id}/</code></h3>
-<p>Gets a specific order</p>
-<h2 id='webhooks'>Webhooks</h2>
+<h2 id='get-api-v1-orders-order_id'><code>GET api/v1/orders/{order_id}/</code></h2>
+<p>Gets a specific order. This order_id here refers to the Yum Logistics order id which is a uuid.</p>
+
+<blockquote>
+<p>Get specific order object</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X GET --header <span class="s1">'Accept: application/json'</span> --header <span class="s1">'Authorization: Bearer token '</span> <span class="s1">'/api/v1/orders/b0899fba-aa03-4e1f-8985-75bfc470c355/'</span>
+</code></pre>
+<blockquote>
+<p>Response status code 200</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Order</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">(omitted</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">clarity)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='patch-api-v1-orders-order_id'><code>PATCH api/v1/orders/{order_id}/</code></h2>
+<p>Updates any of the allowable fields for an order. This order_id here refers to the Yum Logistics order id which is a uuid.</p>
+
+<blockquote>
+<p>Update an order object</p>
+</blockquote>
+<pre class="highlight shell tab-shell"><code>curl -X PATCH --header <span class="s1">'Content-Type: application/json'</span> --header <span class="s1">'Authorization: Bearer &lt;token&gt;'</span> -d <span class="s1">'{"state":2}'</span> <span class="s1">'/api/v1/orders/b0899fba-aa03-4e1f-8985-75bfc470c355/'</span>
+</code></pre>
+<blockquote>
+<p>Response status code 200</p>
+</blockquote>
+<pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="err">//</span><span class="w"> </span><span class="err">Order</span><span class="w"> </span><span class="err">object</span><span class="w"> </span><span class="err">(omitted</span><span class="w"> </span><span class="err">for</span><span class="w"> </span><span class="err">clarity)</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre><h2 id='webhooks'>Webhooks</h2>
 <blockquote>
 <p>Example POST request</p>
 </blockquote>
 <pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
-  </span><span class="s2">"order_id"</span><span class="p">:</span><span class="s2">"78399303"</span><span class="p">,</span><span class="w">
+  </span><span class="s2">"order_ref"</span><span class="p">:</span><span class="s2">"78399303"</span><span class="p">,</span><span class="w">
   </span><span class="s2">"state"</span><span class="p">:</span><span class="mi">6</span><span class="p">,</span><span class="w">
-  </span><span class="s2">"url"</span><span class="p">:</span><span class="s2">"https://trck.at/7BWnF9JX"</span><span class="w">
+  </span><span class="s2">"tracking_url"</span><span class="p">:</span><span class="s2">"https://trck.at/7BWnF9JX"</span><span class="w">
 
 </span><span class="p">}</span><span class="w">
 </span></code></pre>
-<p>Notifications are sent once the order state change as web hooks. The client should configure a callbak url to update the order status on their end with these new status. The webhooks notifications are sent as HTTP POST requests to the client server. Tracking URLs for picked up orders are also sent for sharing with the client to live track the client locations.</p>
+<p>Your application receives a webhook notification whenever the status of an order changes. Webhooks notifications are sent as an HTTP POST request to your server.Once you implement and share the webhook endpoint, we configure it to receive notifications for all the orders created with your api details.</p>
 
 <aside class="notice">
-<code> Callback specification and limitations e.g Authorization Scheme to API will be provided by the client</code>
+  When updating an order state on your server the steps are:
+  1. Consume the nofication via the webhook for the order change
+  2. Call the GET order api for the full details of the order object
 </aside>
 <h3 id='json-body-parameters'>JSON Body parameters</h3>
 <p>The format of the JSON has POST the parameters outlined below:</p>
@@ -889,19 +962,19 @@ A succesfull call to any of the endpoints above returns a token e.g
 </tr>
 </thead><tbody>
 <tr>
-<td>order_id</td>
+<td>order_ref</td>
 <td>string</td>
 <td>The clients order id</td>
 </tr>
 <tr>
 <td>state</td>
 <td>integer</td>
-<td>The current order state</td>
+<td>The latest order order state</td>
 </tr>
 <tr>
-<td>url</td>
+<td>tracking_url</td>
 <td>string</td>
-<td>Tracking url</td>
+<td>Tracking url. This is only available when the order has been picked up by driver.</td>
 </tr>
 </tbody></table>
 <h2 id='riders'>Riders</h2>
@@ -909,11 +982,12 @@ A succesfull call to any of the endpoints above returns a token e.g
 <p>Check if rider is available for a checkout about to compeleted by client</p>
 </blockquote>
 <pre class="highlight shell tab-shell"><code>
-curl -X GET --header <span class="s1">'Accept: application/json'</span> --header <span class="s1">'Content-Type: application/json'</span>  --header <span class="s1">'Authorization: Bearer token'</span> <span class="s1">'/api/v1/available-riders/{branch_id}/'</span>
+curl -X GET --header <span class="s1">'Accept: application/json'</span> --header <span class="s1">'Content-Type: application/json'</span> <span class="s1">'/api/v1/available-riders/{branch_id}/'</span>
 
 </code></pre>
-<p>To check a rider availability for a client checking out, we need to send the information of the  branch the client is checking out.
-<code>GET /api/v1/available-riders/{branch_id}/</code></p>
+<p>To check a rider availability for a client checking out, we need to send the information of the  branch the client is checking out.</p>
+
+<p><code>GET /api/v1/available-riders/{branch_id}/</code></p>
 <h4 id='response-2'>Response</h4>
 <blockquote>
 <p>Response status_code: 200 OK</p>
@@ -936,10 +1010,11 @@ curl -X GET --header <span class="s1">'Accept: application/json'</span> --header
       </span><span class="s2">"state_display"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Free for assignment"</span><span class="p">,</span><span class="w">
       </span><span class="s2">"distance"</span><span class="p">:</span><span class="mf">100.00</span><span class="p">,</span><span class="w">
     </span><span class="p">}</span><span class="w">
-  </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
 
 </span></code></pre>
-<p>Returns list of available riders ordered by the proximity to the store in an ascending order. The rider object in the response has the following fields.</p>
+<p>Returns a list of available riders ordered by the proximity to the store in an ascending order. The rider object in the response has the following fields.</p>
 
 <table><thead>
 <tr>
@@ -981,7 +1056,7 @@ curl -X GET --header <span class="s1">'Accept: application/json'</span> --header
 <tr>
 <td>state_display</td>
 <td>string</td>
-<td>An explanation of the rrider state</td>
+<td>An explanation of the rider state</td>
 </tr>
 <tr>
 <td>distance</td>
@@ -989,10 +1064,6 @@ curl -X GET --header <span class="s1">'Accept: application/json'</span> --header
 <td>The distance of the rider from the store</td>
 </tr>
 </tbody></table>
-
-<aside class="notice">
-The riders endpoint requires authentication details to be sent on the headers too.
-</aside>
 <h1 id='errors'>Errors</h1>
 <p>The Yum Logistics API uses the following error codes:</p>
 
